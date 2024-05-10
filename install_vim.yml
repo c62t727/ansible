@@ -4,25 +4,29 @@
   become: true
   tasks:
 
-  - name: update repo index
-    ansible.builtin.yum:
+  - name: Install updates
+    tags: always
+    package:
+      update_only: yes
       update_cache: yes
+    when: ansible_distribution == "CentOS"
 
-  - name: install vim package
-    ansible.builtin.yum:
-      name: vim
+  - name: Install Chrony
+    package:
+      name: 
+        - "{{ chrony_package }}"
       state: latest
 
-  - name: install nano package
-    ansible.builtin.yum:
-      name: nano
-      state: absent
-
-  - name: install chrony package
-    ansible.builtin.yum:
-      name: chrony
+- hosts: Cent7-01
+  tags: centos,vim,nano
+  become: true
+  tasks:
+  - name: install vim and nano packages
+    package:
+      name: 
+        - "{{ vim_package }}" 
+        - "{{ nano_package }}"
       state: latest
-      update_cache: yes
 
   - name: deploy chrony.conf template
     template:
@@ -37,3 +41,22 @@
     service:
       name: chronyd
       state: started
+
+- hosts: Cent7-02
+  become: true
+  tasks:
+
+  - name: Install httpd service
+    tags: apache,apache2,httpd
+    package:
+      name: httpd
+      state: latest
+
+  - name: copy default html file for site
+    tags: apache,apache2,httpd
+    copy:
+      src: default_site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
