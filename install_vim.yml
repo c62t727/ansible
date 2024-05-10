@@ -16,7 +16,7 @@
   - name: install nano package
     ansible.builtin.yum:
       name: nano
-      state: latest
+      state: absent
 
   - name: install chrony package
     ansible.builtin.yum:
@@ -33,7 +33,7 @@
       mode: 0644
       backup: yes
 
-  - name: retart chrony service
+  - name: start the chrony service
     service:
       name: chronyd
-      state: restarted
+      state: started
