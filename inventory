@@ -1,6 +1,6 @@
 # Inventory File
 [Cent7-01]
-192.168.1.147 vim_package=vim nano_package=nano chrony_package=chrony
+192.168.1.147 vim_package=vim nano_package=nano chrony_package=chrony httpd_package=httpd
 
 [Cent7-02]
-192.168.1.130 vim_package=vim nano_package=nano chrony_package=chrony
+192.168.1.130 vim_package=vim nano_package=nano chrony_package=chrony httpd_package=httpd

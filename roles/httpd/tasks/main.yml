@@ -1,0 +1,35 @@
+- name: Install httpd
+  package:
+    name: httpd
+    state: latest
+
+- name: start the httpd service
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: open the http port
+  firewalld:
+    service: http
+    permanent: true
+    state: enabled
+
+- name: Copy default.html
+  copy:
+    src: files/default_site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Retsart the httpd service
+  service:
+    name: httpd
+    state: restarted
+
+- name: Restart the firewall service
+  service:
+    name: firewalld
+    state: restarted
+

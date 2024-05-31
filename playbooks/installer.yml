@@ -1,0 +1,41 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install updates
+    tags: always
+    ansible.builtin.package:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: Install Chrony
+    ansible.builtin.package:
+      name: 
+        - "{{ chrony_package }}"
+      state: latest
+
+- hosts: Cent7-01
+  tags: centos,vim,nano
+  become: true
+
+  tasks:
+  - name: install vim and nano packages
+    ansible.builtin.package:
+      name: 
+        - "{{ vim_package }}" 
+        - "{{ nano_package }}"
+      state: latest
+
+- hosts: Cent7-02
+  become: true
+  tasks:
+
+  - name: Install httpd service
+    tags: apache,apache2,httpd
+    ansible.builtin.package:
+      name:
+       - "{{ httpd_package }}"
+      state: latest

@@ -1,0 +1,4 @@
+- name: Install Nano
+  package:
+    name: nano
+    state: latest
