@@ -4,3 +4,18 @@
 
 [Cent7-02]
 192.168.1.130 vim_package=vim nano_package=nano chrony_package=chrony httpd_package=httpd
+
+[Rocky8-01]
+192.168.1.188 vim_package=vim nano_package=nano chrony_package=chrony httpd_package=httpd
+
+[clients]
+192.168.1.147
+192.168.1.130
+192.168.1.188
+
+[file_servers]
+192.168.1.188
+
+[web_servers]
+192.168.1.147
+192.168.1.130

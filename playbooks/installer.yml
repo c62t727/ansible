@@ -2,20 +2,19 @@
 
 - hosts: all
   become: true
-  tasks:
-
-  - name: Install updates
-    tags: always
-    ansible.builtin.package:
-      update_only: yes
-      update_cache: yes
-    when: ansible_distribution == "CentOS"
+  pre_tasks:
 
   - name: Install Chrony
     ansible.builtin.package:
       name: 
         - "{{ chrony_package }}"
       state: latest
+      update_cache: true
+
+  - name: Create user simone
+    ansible.builtin.user:
+      name: simone
+      groups: root
 
 - hosts: Cent7-01
   tags: centos,vim,nano
@@ -30,6 +29,7 @@
       state: latest
 
 - hosts: Cent7-02
+  tags: httpd
   become: true
   tasks:
 
@@ -39,3 +39,15 @@
       name:
        - "{{ httpd_package }}"
       state: latest
+
+- hosts: web_servers
+  tags: httpd
+  become: true
+  tasks:
+
+  - name: Update httpd
+    ansible.builtin.package:
+      name: httpd
+      state: latest
+
+ 
