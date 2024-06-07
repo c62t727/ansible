@@ -1,0 +1,18 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+  - name: Update repo
+    ansible.builtin.package:
+      update_cache: true
+
+  - name: Call role - role_chrony
+    ansible.builtin.include_role:
+      name: 
+       - roles/chrony
+       - roles/httpd
+
+    
+   
+

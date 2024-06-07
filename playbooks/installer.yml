@@ -7,7 +7,7 @@
   - name: Install Chrony
     ansible.builtin.package:
       name: 
-        - "{{ chrony_package }}"
+        - "{{ chrony_package_name }}"
       state: latest
       update_cache: true
 
@@ -15,6 +15,7 @@
     ansible.builtin.user:
       name: simone
       groups: root
+      state: absent
 
 - hosts: Cent7-01
   tags: centos,vim,nano
@@ -24,8 +25,8 @@
   - name: install vim and nano packages
     ansible.builtin.package:
       name: 
-        - "{{ vim_package }}" 
-        - "{{ nano_package }}"
+        - "{{ vim_package_name }}" 
+        - "{{ nano_package_name }}"
       state: latest
 
 - hosts: Cent7-02
@@ -37,7 +38,7 @@
     tags: apache,apache2,httpd
     ansible.builtin.package:
       name:
-       - "{{ httpd_package }}"
+       - "{{ httpd_package_name }}"
       state: latest
 
 - hosts: web_servers

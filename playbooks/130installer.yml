@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+  - name: Update repo
+    ansible.builtin.package:
+      update_cache: true
+
+  - name: Call role - installer
+    ansible.builtin.include_role:
+      name: "{{ item }}"
+    loop: "{{ prereq_install }}"    
+
+  - name: Call role - role_hostname
+    ansible.builtin.include_role:
+      name: "hostname"
+    
+   
+

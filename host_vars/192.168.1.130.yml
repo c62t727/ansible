@@ -1,0 +1,9 @@
+vim_package_name: vim 
+nano_package_name: nano
+chrony_package_name: chrony
+httpd_package_name: httpd
+chrony_service: chronyd
+httpd_service: httpd
+
+hostname: 
+  name: Cent7-02

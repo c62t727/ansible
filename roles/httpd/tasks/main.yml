@@ -1,11 +1,11 @@
 - name: Install httpd
-  package:
-    name: httpd
+  ansible.builtin.package:
+    name: "{{ httpd_package_name }}"
     state: latest
 
 - name: start the httpd service
   service:
-    name: httpd
+    name: "{{ httpd_service }}"
     state: started
     enabled: true
 
@@ -25,7 +25,7 @@
 
 - name: Retsart the httpd service
   service:
-    name: httpd
+    name: "{{ httpd_service }}"
     state: restarted
 
 - name: Restart the firewall service

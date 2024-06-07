@@ -1,0 +1,6 @@
+#group_vars file
+prereq_install:
+  - roles/vim
+  - roles/chrony
+  - roles/nano
+  - roles/httpd
